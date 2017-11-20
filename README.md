@@ -18,6 +18,8 @@ Download the project directory and cd to this directory. Use
 
 to train the model with the Yale Faces data set. If you want to train the model using your own data, just put it into the data directory (./yalefaces) and if need be, modify the `helper.py` file to read your data (this project was built to read the Yale Faces data specifically, not any images). 
 
+This model can achieve 100% accuracy on validation data (the Yale dataset was split in 80% training and 20% validation set). Obviously, the validation set is extremely similar to the training set ( we took 2 to 4 images per person for validation, but faces of the same person remain similar). Hence, the model is highly overfitting the data. However, in the context of face detection, this is a positive behaviour for our model. We want the model to remind your face specifically, so a high degree of overfitting is required.
+
 ### Deployment
 
 TODO create a `predict.py` file that takes as arguments names of images file to predict. 
