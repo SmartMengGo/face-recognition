@@ -5,16 +5,14 @@ Created on Tue Nov 14 17:40:13 2017
 @author: bebxadvaboy
 """
 
-#from keras.utils import np_utils
-#from keras.models import Sequential
-#from keras.layers import Dense, Dropout, Activation
 
 
 import tensorflow as tf
-from tf_helper import Layers
 from datetime import datetime
 import os
 import numpy as np
+
+
 class FaceDetector(object):
     
     def __init__(self, dropout=.2, epochs=3, batch_size=5, learning_rate = .00001):
@@ -35,13 +33,11 @@ class FaceDetector(object):
             x -- tensorflow place holder for input data
         
         """
-        # TF Estimator input is a dict, in case of multiple inputs
-        # Hidden fully connected layer with 256 neurons
+
+        # Hidden fully connected layer with 512 neurons
         layer_1 = tf.layers.dense(x, 512)
-        #h_drop_1 = tf.nn.dropout(layer_1, self.dropout)
-        # Hidden fully connected layer with 256 neurons
+        # Hidden fully connected layer with 512 neurons
         layer_2 = tf.layers.dense(layer_1, 512)
-        #h_drop_2 = tf.nn.dropout(layer_2, self.dropout)
         # Output fully connected layer with a neuron for each class
         out_layer = tf.layers.dense(layer_2, self.num_classes)
        
@@ -63,18 +59,7 @@ class FaceDetector(object):
         input_x = tf.placeholder(tf.float32, [None, input_size], name="input_x")
         input_y = tf.placeholder(tf.int32, [None, output_size], name="input_y")
         
-#        normal_1 = tf.nn.relu(self.layer.normal_full_layer(input_x, 512, 
-#                                                layer_name="normal_layer_1"))
-#        
-#        h_drop_1 = tf.nn.dropout(normal_1, self.dropout)
-#        
-#        normal_2 = tf.nn.relu(self.layer.normal_full_layer(h_drop_1, 512, 
-#                                                layer_name="normal_layer_2"))
-#        
-#        h_drop_2 = tf.nn.dropout(normal_2, self.dropout)
-#        
-#        y_pred = (self.layer.normal_full_layer(h_drop_2,  self.num_classes, 
-#                                                layer_name="prediction_layer"))
+
         y_pred= self.neural_net(input_x)
         
         with tf.name_scope('cross_entropy'):
@@ -140,8 +125,7 @@ class FaceDetector(object):
                     y_batch_train = y_train[i: i+self.batch_size]
                     
                     tr, ce, pr =sess.run([train,cross_entropy, y_pred],feed_dict={input_x:x_batch_train, input_y:y_batch_train})
-#                    print(pr)
-#                    print(pr.shape)
+
                     print("{} iterations: {}   loss: {}  ".format(str(datetime.now()),i, ce))
                 
                 if X_valid is not None:
