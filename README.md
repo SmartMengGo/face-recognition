@@ -20,6 +20,12 @@ to train the model with the Yale Faces data set. If you want to train the model 
 
 This model can achieve 100% accuracy on validation data (the Yale dataset was split in 80% training and 20% validation set). Obviously, the validation set is extremely similar to the training set ( we took 2 to 4 images per person for validation, but faces of the same person remain similar). Hence, the model is highly overfitting the data. However, in the context of face detection, this is a positive behaviour for our model. We want the model to remind your face specifically, so a high degree of overfitting is required.
 
+Remark: Do not forget to change the path to the OpenCv haarcascade_frontalface_default.xml in the helper.py file. Just change the variable
+
+`OPENCV_HAAR_CSC_PATH = "C:\\Users\\bebxadvaboy\\AppData\\Local\\Continuum\\Anaconda3\\pkgs\\opencv-3.3.0-py36_200\\Library\\etc\\haarcascades\\haarcascade_frontalface_default.xml"` 
+
+to your correct file path.
+
 ### Deployment
 
 TODO create a `predict.py` file that takes as arguments names of images file to predict. 
